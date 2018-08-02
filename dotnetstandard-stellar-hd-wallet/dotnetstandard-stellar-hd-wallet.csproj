@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>dotnetstandard_stellar_hd_wallet</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="dotnetstandard-bip32" Version="1.0.0" />
+    <PackageReference Include="dotnetstandard-bip39" Version="1.0.1" />
+  </ItemGroup>
+
+</Project>
