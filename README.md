@@ -1,5 +1,5 @@
 # dotnetstandard-stellar-hd-wallet
-.NET Standard 2.0 Key derivation for Stellar (SEP-0005)
+.NET Standard 2.0 Key derivation for Stellar ([SEP-0005](https://github.com/stellar/stellar-protocol/blob/master/ecosystem/sep-0005.md))
 
 ## Usage
 
