@@ -6,13 +6,11 @@ namespace dotnetstandard_stellar_hd_wallet
 {
     public class StellarHDWallet
     {
-        const int EntropyStrength = 256;
-
         static BIP39 Bip39 = new BIP39();
         static BIP32 Bip32 = new BIP32();
         private string _seedHex;
 
-        public StellarHDWallet(string seedHex)
+        private StellarHDWallet(string seedHex)
         {
             _seedHex = seedHex;
         }
@@ -20,6 +18,11 @@ namespace dotnetstandard_stellar_hd_wallet
         public static StellarHDWallet FromMnemonic(string mnemonic)
         {
             return new StellarHDWallet(Bip39.MnemonicToSeedHex(mnemonic, ""));
+        }
+
+        public string GetPrivateKey(int index)
+        {
+            return GetKeyPair(index).PrivateKey;
         }
 
         public string Derive(string path)
@@ -33,6 +36,21 @@ namespace dotnetstandard_stellar_hd_wallet
             var keyPairBytes = GetKeyPairBytes(index);
 
             return (StrKey.EncodeStellarAccountId(keyPairBytes.PublicKey), StrKey.EncodeStellarSecretSeed(keyPairBytes.PrivateKey));
+        }
+
+        public static StellarHDWallet FromSeed(byte[] seed)
+        {
+            return new StellarHDWallet(seed.ToStringHex());
+        }
+
+        public static StellarHDWallet FromSeed(string seed)
+        {
+            return new StellarHDWallet(seed);
+        }
+
+        public static bool ValidateMnemonic(string mnemonic, BIP39Wordlist wordlist)
+        {
+            return Bip39.ValidateMnemonic(mnemonic, wordlist);
         }
 
         private (byte[] PublicKey, byte[] PrivateKey) GetKeyPairBytes(int index)
@@ -55,9 +73,9 @@ namespace dotnetstandard_stellar_hd_wallet
             return derivePath.Key;
         }
 
-        public static string GenerateMnemonic(BIP39Wordlist wordlistType)
+        public static string GenerateMnemonic(BIP39Wordlist wordlistType, int entropyStrength = 256)
         {
-            return Bip39.GenerateMnemonic(EntropyStrength, wordlistType);
+            return Bip39.GenerateMnemonic(entropyStrength, wordlistType);
         }
     }
 }

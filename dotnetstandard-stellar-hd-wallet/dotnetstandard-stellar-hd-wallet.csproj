@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="dotnetstandard-bip32" Version="1.0.0" />
-    <PackageReference Include="dotnetstandard-bip39" Version="1.0.1" />
+    <PackageReference Include="dotnetstandard-bip39" Version="1.0.2" />
   </ItemGroup>
 
 </Project>
